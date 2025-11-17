@@ -51,7 +51,6 @@
       from { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
       to { text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc; }
     }
-    /* Matrix-style background effect */
     .matrix {
       position: absolute;
       top: 0; left: 0;
@@ -76,11 +75,20 @@
     📸 Follow & Message on Instagram
   </a>
 
-  <!-- Background Audio -->
-  <audio autoplay>
-    <source src="welcome.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <!-- 🔊 Voice Welcome -->
+  <script>
+    window.onload = function() {
+      var msg = new SpeechSynthesisUtterance("Cyber Security Ritu Raj ki taraf se SBTE Bihar website mein aap logon ka swagat hai");
+      msg.lang = "hi-IN"; // Hindi voice
+      msg.pitch = 1;
+      msg.rate = 1;
+      var voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        msg.voice = voices.find(voice => voice.name.includes("Female")) || voices[0];
+      }
+      window.speechSynthesis.speak(msg);
+    };
+  </script>
 
 </body>
 </html>

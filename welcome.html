@@ -75,20 +75,32 @@
     📸 Follow & Message on Instagram
   </a>
 
-  <!-- 🔊 Voice Welcome -->
+  <!-- 🔊 Voice Welcome-->
   <script>
-    window.onload = function() {
-      var msg = new SpeechSynthesisUtterance("Cyber Security Ritu Raj ki taraf se SBTE Bihar website mein aap logon ka swagat hai");
-      msg.lang = "hi-IN"; // Hindi voice
-      msg.pitch = 1;
-      msg.rate = 1;
-      var voices = window.speechSynthesis.getVoices();
-      if (voices.length > 0) {
-        msg.voice = voices.find(voice => voice.name.includes("Female")) || voices[0];
-      }
-      window.speechSynthesis.speak(msg);
-    };
-  </script>
+  function speakWelcome() {
+    var msg = new SpeechSynthesisUtterance("Cyber Security Ritu Raj ki taraf se SBTE Bihar website mein aap logon ka swagat hai");
+    msg.lang = "hi-IN"; // Hindi voice
+    msg.pitch = 1;
+    msg.rate = 1;
+
+    var voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      msg.voice = voices.find(voice => voice.name.includes("Female")) || voices[0];
+    }
+    window.speechSynthesis.speak(msg);
+  }
+
+  // Ensure voices are loaded before speaking
+  window.speechSynthesis.onvoiceschanged = function() {
+    speakWelcome();
+  };
+
+  // Fallback: try once on load
+  window.onload = function() {
+    speakWelcome();
+  };
+      </script>
+  
 
 </body>
 </html>
